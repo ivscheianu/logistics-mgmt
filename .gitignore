@@ -1,0 +1,89 @@
+############################
+# Gradle
+############################
+.gradle/
+build/
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse m2e generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+
+############################
+# Java / Spring Boot
+############################
+*.class
+*.log
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+############################
+# Environment / Secrets
+############################
+.env
+**/.env
+application-local.yml
+application-local.properties
+
+############################
+# IntelliJ IDEA
+############################
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+############################
+# VS Code
+############################
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+
+############################
+# OS files
+############################
+.DS_Store
+.DS_Store?
+Thumbs.db
+
+############################
+# Logs
+############################
+logs/
+*.log
+
+############################
+# Test / Coverage
+############################
+target/
+coverage/
+*.exec
+
+############################
+# Misc
+############################
+*.swp
+*.swo
+
+!gradle/wrapper/gradle-wrapper.jar
