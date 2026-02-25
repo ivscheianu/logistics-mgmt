@@ -10,4 +10,8 @@ public interface DeliveryService {
     DeliveryDTO updateDelivery(DeliveryDTO updatedDelivery, Long id);
 
     void delete(Long deliveryId);
+
+//    void softDelete(Long deliveryId);
+
+    DeliveryDTO getById(Long deliveryId);
 }

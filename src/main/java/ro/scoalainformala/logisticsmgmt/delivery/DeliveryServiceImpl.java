@@ -26,6 +26,10 @@ public class DeliveryServiceImpl implements DeliveryService {
         List<DeliveryDO> allDeliveriesFromDatabase = deliveryRepository.findAll();
         List<DeliveryDTO> deliveriesForUI = new ArrayList<>();
         for (DeliveryDO deliveryDO : allDeliveriesFromDatabase) {
+            // fixed by @SQLRestriction annotation from DeliveryDO
+//            if (!deliveryDO.isEnabled()) {
+//                continue;
+//            }
             final DeliveryDTO deliveryDTO = new DeliveryDTO();
             mapDOToDTO(deliveryDO, deliveryDTO);
             deliveriesForUI.add(deliveryDTO);
@@ -60,6 +64,32 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Override
     public void delete(Long deliveryId) {
         deliveryRepository.deleteById(deliveryId);
+    }
+
+    // soft deleted handled by @SQLDelete from DeliveryDO
+//    @Override
+//    public void softDelete(Long deliveryId) {
+//        deliveryRepository
+//                .findById(deliveryId)
+//                .ifPresent(foundDelivery -> {
+//                    foundDelivery.setEnabled(false);
+//                    deliveryRepository.save(foundDelivery);
+//                });
+//    }
+
+    @Override
+    public DeliveryDTO getById(Long deliveryId) {
+        return deliveryRepository.findById(deliveryId)
+                .map(foundDelivery -> {
+                    // fixed by @SQLRestriction annotation from DeliveryDO
+//                    if (!foundDelivery.isEnabled()) {
+//                        return null;
+//                    }
+                    final DeliveryDTO deliveryDTO = new DeliveryDTO();
+                    mapDOToDTO(foundDelivery, deliveryDTO);
+                    return deliveryDTO;
+                })
+                .orElse(null);
     }
 
     private void mapDTOToDO(DeliveryDTO deliveryDTO, DeliveryDO deliveryTobeSaved) {

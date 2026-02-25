@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
@@ -16,6 +18,8 @@ import java.time.Instant;
  * Should NEVER be exposed to the exterior world. e.g: clients (browsers, mobile apps, etc.)
  */
 @Data
+@SQLDelete(sql = "UPDATE delivery SET enabled = false WHERE id = ?")
+@SQLRestriction("enabled <> false")
 @Entity(name = "delivery")
 public class DeliveryDO {
 

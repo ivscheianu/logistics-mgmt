@@ -3,14 +3,7 @@ package ro.scoalainformala.logisticsmgmt.delivery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +23,11 @@ public class DeliveryController {
         return deliveryService.getAllDeliveries();
     }
 
+    @GetMapping("/{deliveryId}")
+    public DeliveryDTO getDeliveryById(@PathVariable("deliveryId") Long deliveryId) {
+        return deliveryService.getById(deliveryId);
+    }
+
     @PostMapping
     public DeliveryDTO createDelivery(@Validated @RequestBody DeliveryDTO delivery) {
         return deliveryService.saveDelivery(delivery);
@@ -45,9 +43,8 @@ public class DeliveryController {
         deliveryService.delete(deliveryId);
     }
 
-    @DeleteMapping("/soft-delete/{deliveryId}")
-    private void softDelete(@PathVariable("deliveryId") Long deliveryId) {
-        //todo: implement it
+//    @DeleteMapping("/soft-delete/{deliveryId}")
+//    private void softDelete(@PathVariable("deliveryId") Long deliveryId) {
 //        deliveryService.softDelete(deliveryId);
-    }
+//    }
 }
