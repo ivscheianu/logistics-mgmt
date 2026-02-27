@@ -1,16 +1,15 @@
 package ro.scoalainformala.logisticsmgmt.delivery;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
+import ro.scoalainformala.logisticsmgmt.pckg.PackageDO;
 
 import java.time.Instant;
+import java.util.List;
 
 
 /**
@@ -33,7 +32,12 @@ public class DeliveryDO {
 
     private String courierContact;
 
-//    private List<PackageDO> packages;
+    @OneToMany(
+            mappedBy = "delivery",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<PackageDO> packages;
 
     private String contactName;
 
